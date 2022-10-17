@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "0b21fbf4-3b2d-430a-8ab9-d585d230539b",
+		"name": "Clinical Portal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5859808"
+	},
+	"item": [
+		{
+			"name": "Patients",
+			"item": [
+				{
+					"name": "Create Patients",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"patientFirstName\": \"Buy\",\n    \"patientLastName\": \"Em\",\n    \"patientDOB\" : \"2020-06-02\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/clinical/portal/patients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clinical",
+								"portal",
+								"patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List of Patients By Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\":\"Jane\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/clinical/portal/patients?firstName=&lastName=d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clinical",
+								"portal",
+								"patients"
+							],
+							"query": [
+								{
+									"key": "firstName",
+									"value": ""
+								},
+								{
+									"key": "lastName",
+									"value": "d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Count of Patients by Year",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/clinical/portal/patients/yearcount?startYear=1990&endYear=2022",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clinical",
+								"portal",
+								"patients",
+								"yearcount"
+							],
+							"query": [
+								{
+									"key": "startYear",
+									"value": "1990"
+								},
+								{
+									"key": "endYear",
+									"value": "2022"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
