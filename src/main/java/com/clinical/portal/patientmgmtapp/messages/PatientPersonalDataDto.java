@@ -1,10 +1,7 @@
 package com.clinical.portal.patientmgmtapp.messages;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.*;
 import java.util.Date;
@@ -13,7 +10,8 @@ import java.util.Date;
 @Data
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class PatientPersonalDataDto {
 
     @NotBlank(message = "cannot be null or empty")

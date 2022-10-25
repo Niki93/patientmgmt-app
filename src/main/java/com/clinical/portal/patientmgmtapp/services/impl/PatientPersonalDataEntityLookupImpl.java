@@ -1,5 +1,6 @@
 package com.clinical.portal.patientmgmtapp.services.impl;
 
+import com.clinical.portal.patientmgmtapp.entities.Address;
 import com.clinical.portal.patientmgmtapp.entities.PatientPersonalData;
 import com.clinical.portal.patientmgmtapp.messages.NameSearchQueryParameters;
 import com.clinical.portal.patientmgmtapp.messages.YearBornCountDto;
@@ -11,10 +12,12 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+@Transactional(readOnly = true)
 public class PatientPersonalDataEntityLookupImpl implements PatientPersonalDataEntityLookup {
     private static final Logger log = LoggerFactory.getLogger(PatientPersonalDataEntityLookupImpl.class);
 
@@ -25,9 +28,29 @@ public class PatientPersonalDataEntityLookupImpl implements PatientPersonalDataE
     }
 
     @Override
+    @Transactional
     public PatientPersonalData savePatientPersonalData(PatientPersonalData patientPersonalData) {
         log.info("Save Patient Data to DB");
-        return patientPersonalDataRepository.save(patientPersonalData);
+        PatientPersonalData patientPersonalDataSaved = patientPersonalDataRepository.save(patientPersonalData);
+        Address address = new Address();
+        address.setPatientSid(patientPersonalDataSaved.getPatientSid());
+
+        address.setStreetLine1("Hobsonville");
+        address.setStreetLine2("Parking Road");
+        address.setPostalCode(87923);
+
+        patientPersonalData.setAddress(address);
+
+        patientPersonalDataRepository.save(patientPersonalData);
+
+        //patientPersonalDataRepository.findById();
+
+        return patientPersonalDataSaved;
+    }
+
+    @Override
+    public Optional<PatientPersonalData> findPatientDataById(Long patientId){
+        return patientPersonalDataRepository.findById(patientId);
     }
 
     public Optional<PatientPersonalData> findIfPatientDataExists(PatientPersonalData patientPersonalData){

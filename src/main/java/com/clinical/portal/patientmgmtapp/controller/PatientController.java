@@ -8,6 +8,7 @@ import com.clinical.portal.patientmgmtapp.messages.response.PatientListResponse;
 import com.clinical.portal.patientmgmtapp.services.PatientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -41,6 +42,13 @@ public class PatientController {
         PatientListResponse patientListResponse =
                 patientService.retrievePatientPersonalDataByNames(nameSearchQueryParameters);
         return ResponseEntity.status(patientListResponse.getHttpStatus()).body(patientListResponse);
+    }
+
+    @GetMapping(path = "/patients/{patientId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity retrievePatientDataById(@Valid @PathVariable String patientId){
+        PatientListResponse patientListResponse =
+                patientService.retrievePatientPersonalDataById(patientId);
+        return ResponseEntity.status(HttpStatus.OK).body("Searching for patientId:"+patientId);
     }
 
     @GetMapping(path="/patients/yearcount", produces = MediaType.APPLICATION_JSON_VALUE)

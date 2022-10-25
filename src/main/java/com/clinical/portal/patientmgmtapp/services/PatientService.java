@@ -9,6 +9,8 @@ import com.clinical.portal.patientmgmtapp.messages.response.PatientListResponse;
 public interface PatientService {
     PatientDataResponse savePatientPersonalData(PatientPersonalDataDto patientPersonalDataDto);
 
+    PatientListResponse retrievePatientPersonalDataById(String patientId);
+
     PatientListResponse retrievePatientPersonalDataByNames(NameSearchQueryParameters nameSearchQueryParameters);
 
     PatientListResponse retrievePatientPersonalDataByYearsBorn(YearSearchQueryParameters yearSearchQueryParameters);

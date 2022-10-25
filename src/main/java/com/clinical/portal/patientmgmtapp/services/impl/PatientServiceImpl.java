@@ -26,6 +26,13 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public PatientListResponse retrievePatientPersonalDataById(String patientId) {
+        log.info("Inside PatientServiceImpl, calling retrievePatientPersonalDataById to retrievePatientPersonalDataById");
+        long patientIdLong = Long.valueOf(patientId);
+        return patientDataResponseProviderService.retrievePatientDataById(patientIdLong);
+    }
+
+    @Override
     public PatientListResponse retrievePatientPersonalDataByNames(NameSearchQueryParameters nameSearchQueryParameters) {
         log.info("Inside PatientServiceImpl, calling patientDataResponseProviderService to retrievePatientPersonalDataByNames");
         return patientDataResponseProviderService.retrievePatientPersonalDataByNames(nameSearchQueryParameters);

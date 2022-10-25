@@ -14,10 +14,13 @@ import java.util.List;
 public class DataBaseClass {
 
     public PatientPersonalDataDto getPatientPersonalDataDto(){
-        PatientPersonalDataDto patientPersonalDataDto = new PatientPersonalDataDto();
-        patientPersonalDataDto.setFirstName("Emma");
-        patientPersonalDataDto.setLastName("Richards");
-        patientPersonalDataDto.setDateOfBirth(Date.valueOf("2021-02-03"));
+//        PatientPersonalDataDto.builder()
+//                .firstName("Emma")
+//                .lastName("Richards")
+//                .dateOfBirth(Date.valueOf("2021-02-03"))
+//                .build();
+        PatientPersonalDataDto patientPersonalDataDto =
+                new PatientPersonalDataDto("Emma","Richards",Date.valueOf("2021-02-03"));
         return patientPersonalDataDto;
     }
 

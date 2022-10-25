@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -75,7 +76,7 @@ public class PatientDataResponseProviderServiceImpl implements PatientDataRespon
         if(patientPersonalDataList.isPresent() && !patientPersonalDataList.get().isEmpty()){
             List<PatientPersonalDataDto> patientPersonalDataDtoList =
                     patientPersonalDataList.get().stream()
-                    .map(patientPersonalData -> convertToDto(patientPersonalData))
+                    .map(patientPersonalData -> convertToDtoWithBuilder(patientPersonalData))
                     .collect(Collectors.toList());
 
             patientListResponse.setHttpStatus(HttpStatus.OK);
@@ -87,6 +88,18 @@ public class PatientDataResponseProviderServiceImpl implements PatientDataRespon
         }
 
         return patientListResponse;
+    }
+
+    @Override
+    public PatientListResponse retrievePatientDataById(Long patientId){
+        Optional<PatientPersonalData> patientPersonalData =
+                patientPersonalDataEntityLookup.findPatientDataById(patientId);
+        PatientListResponse patientListResponse = new PatientListResponse();
+        patientListResponse.setHttpStatus(HttpStatus.OK);
+        List<PatientPersonalData> patientPersonalDataList = new ArrayList<>();
+        //patientPersonalDataList.add(patientPersonalData);
+        //patientListResponse.setPatients(patientPersonalDataList);
+        return null;
     }
 
     @Override
@@ -114,5 +127,14 @@ public class PatientDataResponseProviderServiceImpl implements PatientDataRespon
     public PatientPersonalData convertToEntity(PatientPersonalDataDto patientPersonalDataDto){
         log.info("Converting PatientPersonalDataDto to Entity");
         return modelMapper.map(patientPersonalDataDto, PatientPersonalData.class);
+    }
+
+    public PatientPersonalDataDto convertToDtoWithBuilder(PatientPersonalData patientPersonalData){
+        log.info("Converting PatientPersonalDataDto to Dto using Builder");
+        return PatientPersonalDataDto.builder()
+                .firstName(patientPersonalData.getFirstName())
+                .lastName(patientPersonalData.getLastName())
+                .dateOfBirth(patientPersonalData.getDateOfBirth())
+                .build();
     }
 }

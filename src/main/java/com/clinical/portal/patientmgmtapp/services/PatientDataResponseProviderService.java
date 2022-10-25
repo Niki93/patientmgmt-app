@@ -12,6 +12,8 @@ public interface PatientDataResponseProviderService {
 
     PatientListResponse retrievePatientPersonalDataByNames(NameSearchQueryParameters nameSearchQueryParameters);
 
+    PatientListResponse retrievePatientDataById(Long patientId);
+
     PatientListResponse retrievePatientPersonalDataByYearsBorn(YearSearchQueryParameters yearSearchQueryParameters);
 
 }

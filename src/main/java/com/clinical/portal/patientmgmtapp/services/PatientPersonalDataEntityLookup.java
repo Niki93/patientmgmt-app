@@ -12,6 +12,8 @@ public interface PatientPersonalDataEntityLookup {
 
     PatientPersonalData savePatientPersonalData(PatientPersonalData patientPersonalData);
 
+    Optional<PatientPersonalData> findPatientDataById(Long patientId);
+
     Optional<PatientPersonalData> findIfPatientDataExists(PatientPersonalData patientPersonalData);
 
     Optional<List<PatientPersonalData>> retrievePatientPersonalDatabyNames(NameSearchQueryParameters nameSearchQueryParameters);
