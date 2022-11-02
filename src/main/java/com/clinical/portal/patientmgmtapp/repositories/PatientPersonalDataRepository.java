@@ -21,7 +21,7 @@ public interface PatientPersonalDataRepository
     Optional<List<PatientPersonalData>> findByLastNameLikeIgnoreCase(String lastName);
 
     @Query("SELECT new com.clinical.portal.patientmgmtapp.messages.YearBornCountDto(YEAR(ppd.dateOfBirth), COUNT(ppd.dateOfBirth))  "
-            + "FROM PatientPersonalData AS ppd where YEAR(ppd.dateOfBirth) >= ?1 AND YEAR(ppd.dateOfBirth) <= ?2 "
+            + "FROM PatientPersonalData AS ppd where YEAR(ppd.dateOfBirth) >= ?1 AND YEAR(ppd.dateOfBirth) < ?2 "
             + "GROUP BY YEAR(ppd.dateOfBirth) ORDER BY COUNT(ppd.dateOfBirth) DESC")
     List<YearBornCountDto> countTotalPatientsByStartAndEndYearsBorn(int startYear, int endYear);
 

@@ -45,7 +45,7 @@ public class PatientDataResponseProviderServiceImpl implements PatientDataRespon
                 patientPersonalDataEntityLookup.findIfPatientDataExists(patientPersonalData);
         if(patientDataOpt.isPresent()){
             //Patient Personal Data is Present in DB, hence no need to save as record exists
-            patientDataResponse.setHttpStatus(HttpStatus.CONTINUE);
+            patientDataResponse.setHttpStatus(HttpStatus.OK);
             patientDataResponse.setPatientCreated(false);
             return patientDataResponse;
         }
